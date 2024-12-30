@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function ListDet({ tasks }) {
 
+ const [completedTasks, setCompletedTasks] = useState(Array(tasks.length).fill(false));
 
-  function handleStrike(e) {
-    if(e.target.style.textDecoration) {
-      e.target.style.removeProperty("text-decoration");
-    } else {
-      e.target.style.setProperty("text-decoration", "line-through");
-    }
-  }
+
+ function handleToggle(index) {
+  const updatedTasks = [...completedTasks];
+  updatedTasks[index] = !updatedTasks[index];
+  setCompletedTasks(updatedTasks);
+ }
 
   
   return (
     <div className='list-details'>
-      <>
       <h2>To Do List</h2>
       {tasks.length === 0 ? (
         <p>Add you tasks here.</p>
       ) : (
         tasks.map((task, index) => (
           <div key={index}>
-            <input type="checkbox" id={`task-${index}`}/>  
-            <label className='tasksL pl-2' for={`task-${index}`} onClick={handleStrike}>{task}</label><br/>
+            <input 
+             type="checkbox"
+             id={`task-${index}`}
+             className='checkboxIn'
+             checked={completedTasks[index]}
+             onChange={() => handleToggle(index)}
+             />  
+
+            <label 
+            className='tasksL pl-1' 
+            htmlFor={`task-${index}`}
+            style={{textDecoration: completedTasks[index] ? 'line-through' : 'none'}}
+            >
+              {task}
+              </label>
+              <br/>
           </div>
               
         ))
       )
       }
-
-
-  </>
     </div>
   )
 }

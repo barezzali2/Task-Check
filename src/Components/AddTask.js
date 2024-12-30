@@ -11,7 +11,7 @@ function AddTask({task, setTask, onHandleText}) {
           value={task} 
           onChange={(e) => setTask(e.target.value)}
         />
-        <button className='mt-5 ml-44' onClick={onHandleText}>Add Task</button>
+        <button onClick={onHandleText}>Add Task</button>
     </div>
   )
 }
