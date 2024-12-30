@@ -92,16 +92,18 @@ code {
 .list-details input, label {
   cursor: pointer;
   margin: 15px 0;
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .list-details label {
   /* margin-top: 10px; */
+  vertical-align: middle;
 }
 
 input.checkboxIn {
   width: 45px;
-  height: 35px;
+  height: 34px;
+  vertical-align: middle;
 }
   /* input:checked, label {
     text-decoration-line: line-through;
