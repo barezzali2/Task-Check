@@ -32,19 +32,19 @@ code {
 
 
 .add-task h2{
-  padding-left: 6px;
+  padding-left: 1px;
   font-size: 28px;
   color: black;
   font-weight: bold;
 }
 
 .add-task .add-input {
+  position: relative;
   color: black;
-  width: 450px;
+  width: 100%;
   padding-left: 7px;
   padding-top: 12px;
   padding-bottom: 15px;
-  margin-left: 6px;
   margin-top: 30px;
   font-size: 20px;
   border-radius: 10px;
