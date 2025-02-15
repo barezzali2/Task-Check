@@ -1,48 +1,55 @@
 import React, { useState } from 'react';
 
 function ListDet({ tasks }) {
+  const [completedTasks, setCompletedTasks] = useState(Array(tasks.length).fill(false));
 
- const [completedTasks, setCompletedTasks] = useState(Array(tasks.length).fill(false));
+  function handleToggle(index) {
+    const updatedTasks = [...completedTasks];
+    updatedTasks[index] = !updatedTasks[index];
+    setCompletedTasks(updatedTasks);
+  }
+
+  // Combine tasks with their completion status
+  const taskStatus = tasks.map((task, index) => ({
+    task,
+    completed: completedTasks[index],
+    index
+  }));
 
 
- function handleToggle(index) {
-  const updatedTasks = [...completedTasks];
-  updatedTasks[index] = !updatedTasks[index];
-  setCompletedTasks(updatedTasks);
- }
+  const sortedTasks = taskStatus.sort((a, b) => {
+    if(a.completed === b.completed) return 0;
+    return a.completed ? 1 : -1;
+  });
 
-  
   return (
     <div className='list-details'>
       <h2>To Do List</h2>
       {tasks.length === 0 ? (
-        <p>Add you tasks here.</p>
+        <p>Add your tasks here.</p>
       ) : (
-        tasks.map((task, index) => (
+        sortedTasks.map(({ task, completed, index}) => (
           <div key={index}>
-            <input 
-             type="checkbox"
-             id={`task-${index}`}
-             className='checkboxIn'
-             checked={completedTasks[index]}
-             onChange={() => handleToggle(index)}
-             />  
-
-            <label 
-            className='tasksL pl-1' 
-            htmlFor={`task-${index}`}
-            style={{textDecoration: completedTasks[index] ? 'line-through' : 'none'}}
+            <input
+              type="checkbox"
+              id={`task-${index}`}
+              className='checkboxIn'
+              checked={completed}
+              onChange={() => handleToggle(index)}
+            />
+            <label
+              className='tasksL pl-1'
+              htmlFor={`task-${index}`}
+              style={{ textDecoration: completed ? 'line-through' : 'none' }}
             >
               {task}
-              </label>
-              <br/>
+            </label>
+            <br />
           </div>
-              
         ))
-      )
-      }
+      )}
     </div>
-  )
+  );
 }
 
 export default ListDet;
