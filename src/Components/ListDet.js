@@ -22,6 +22,7 @@ function ListDet({ tasks }) {
     return a.completed ? 1 : -1;
   });
 
+
   return (
     <div className='list-details'>
       <h2>To Do List</h2>
@@ -51,5 +52,6 @@ function ListDet({ tasks }) {
     </div>
   );
 }
+
 
 export default ListDet;
